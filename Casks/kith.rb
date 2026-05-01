@@ -3,7 +3,7 @@
 # rest of the file is intended to be human-edited.
 cask "kith" do
   version "0.1.0"
-  sha256  "0000000000000000000000000000000000000000000000000000000000000000"
+  sha256  "5b47ff9cf97f5c6656071c8bd2c614e8c0580cd80d4831cb4b9f28d86fada743"
 
   url "https://github.com/supaku/kith/releases/download/v#{version}/kith-#{version}-macos-arm64.tar.gz"
   name "kith"
