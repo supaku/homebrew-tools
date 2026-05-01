@@ -2,8 +2,8 @@
 # The `version` and `sha256` lines are rewritten programmatically; the
 # rest of the file is intended to be human-edited.
 cask "kith" do
-  version "0.1.0"
-  sha256  "5b47ff9cf97f5c6656071c8bd2c614e8c0580cd80d4831cb4b9f28d86fada743"
+  version "0.1.1"
+  sha256  "5cccb946a9c2234558c4cba110ebc034624acb488f010b28f8d12f572897721d"
 
   url "https://github.com/supaku/kith/releases/download/v#{version}/kith-#{version}-macos-arm64.tar.gz"
   name "kith"
