@@ -7,28 +7,21 @@ cask "kith" do
 
   url "https://github.com/supaku/kith/releases/download/v#{version}/kith-#{version}-macos-arm64.tar.gz"
   name "kith"
-  desc "macOS CLI bridging Apple Contacts and iMessage for terminal users + AI agents"
+  desc "CLI bridging Apple Contacts and iMessage for terminal users and AI agents"
   homepage "https://github.com/supaku/kith"
 
   livecheck do
     skip "Auto-bumped by GitHub Actions on release."
   end
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
   depends_on arch: :arm64
 
-  # CLI: `binary` symlinks the `kith` wrapper into /opt/homebrew/bin/. The
-  # wrapper resolves the symlink chain and execs libexec/kith with the
-  # SwiftPM resource bundles co-located.
-  binary "kith"
-
-  # GUI bootstrap: `app` installs Kith.app to /Applications. Kith.app is a
-  # headless (LSUIElement=true), hardened-runtime, notarized .app whose
-  # only job is to be a TCC-grantable identity and register the embedded
-  # KithAgent LaunchAgent at Contents/Library/LaunchAgents/. The first
-  # `kith find` call auto-bootstraps Kith.app via `open -a` if the
-  # com.supaku.kith.agent Mach service isn't yet registered.
+  # Install the headless GUI bootstrap and symlink the CLI wrapper into
+  # Homebrew's bin directory. The wrapper resolves that symlink before it
+  # loads the SwiftPM resource bundles from libexec.
   app "Kith.app"
+  binary "kith"
 
   caveats <<~EOS
     kith reads local Apple Contacts and ~/Library/Messages/chat.db via the
