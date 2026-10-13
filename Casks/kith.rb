@@ -14,14 +14,16 @@ cask "kith" do
     skip "Auto-bumped by GitHub Actions on release."
   end
 
-  depends_on macos: :sonoma
   depends_on arch: :arm64
+  depends_on macos: :sonoma
 
-  # Install the headless GUI bootstrap and symlink the CLI wrapper into
-  # Homebrew's bin directory. The wrapper resolves that symlink before it
-  # loads the SwiftPM resource bundles from libexec.
+  # Kith.app registers the KithAgent LaunchAgent, which holds the Contacts
+  # and Full Disk Access grants. The CLI is the signed Mach-O in libexec/,
+  # linked straight into Homebrew's bin directory with no shell wrapper.
+  # It finds its SwiftPM resource bundles next to the symlink-resolved
+  # executable (supaku/kith scripts/check-package-layout.sh proves this).
   app "Kith.app"
-  binary "kith"
+  binary "libexec/kith", target: "kith"
 
   caveats <<~EOS
     kith reads local Apple Contacts and ~/Library/Messages/chat.db via the
